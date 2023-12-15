@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="current"
+            type="com.example.tourmate.model.CurrentWeatherModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+         >
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardElevation="10dp"
+            android:alpha="0.7"
+            app:cardCornerRadius="15dp"
+            >
+
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/tempSwitchId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:textOff="C"
+                android:textOn="F"
+
+
+                app:showText="true" />
+        </androidx.cardview.widget.CardView>
+
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="Weather"
+            android:scaleType="centerCrop"
+
+            android:src="@drawable/planetbackground"
+            />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.weather.WeatherFragment"
+            >
+
+            <TextView
+                android:id="@+id/weatherDateId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:setWeatherDate="@{current.dt}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absulateHeight="24dp"
+                tools:layout_conversion_absulateWidth="107dp"
+                tools:text="SUN 11, 2023"
+                />
+
+
+            <TextView
+                android:id="@+id/weatherAddressId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:text="@{current.name + ','+ current.sys.country}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/weatherDateId"
+                tools:layout_conversion_absulateHeight="35dp"
+                tools:layout_conversion_absulateWidth="117dp"
+                tools:text="Dhaka, BD"
+                />
+
+
+            <TextView
+                android:id="@+id/weatherTempId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+
+                android:text="@{Math.round(current.main.temp)+`\u00B0`}"
+                android:textColor="@color/white"
+                android:textSize="70sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.503"
+                app:layout_constraintTop_toBottomOf="@+id/weatherAddressId"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_conversion_absulateHieght="53dp"
+                tools:layout_conversion_absulateweight="60dp"
+                tools:text="35\u00B0"
+
+                />
+
+
+            <TextView
+                android:id="@+id/weatherFeelsLikeId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+
+                android:text="@{`Feels Like: `+Math.round(current.main.temp)+`\u00B0`}"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.503"
+                app:layout_constraintTop_toBottomOf="@+id/weatherTempId"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_conversion_absulateHieght="27dp"
+                tools:layout_conversion_absulateweight="119dp"
+                tools:text="Feels Like: 39\u00B0"
+
+                />
+
+
+
+            <ImageView
+
+                android:contentDescription="@string/openapi"
+                android:id="@+id/weatherIconId"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="24dp"
+                android:scaleType="centerCrop"
+                tools:layout_conversion_absulateHeight="70dp"
+                tools:layout_conversion_absulateWidth="70dp"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:setWeatherIcon="@{current.weather[0].icon}"
+                app:layout_constraintTop_toBottomOf="@+id/weatherFeelsLikeId"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:src="@mipmap/ic_launcher_round"
+                />
+
+            <TextView
+                android:id="@+id/weatherConditionId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{current.weather[0].description}"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                app:layout_constraintTop_toBottomOf="@+id/weatherIconId"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_conversion_absulateHeight="30dp"
+                tools:layout_conversion_absulateWidth="47dp"
+                tools:text="haze"
+
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+</layout>
